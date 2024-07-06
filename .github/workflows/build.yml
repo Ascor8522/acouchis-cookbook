@@ -1,0 +1,35 @@
+{
+  "name": "build",
+  "run-name": "Compile the LaTeX cookbook and make it available for download",
+  "on": [
+    "push"
+  ],
+  "jobs": {
+    "build": {
+      "name": "Build",
+      "runs-on": "ubuntu-latest",
+      "steps": [
+        {
+          "uses": "actions/checkout@v4",
+          "name": "Checkout the repository"
+        },
+        {
+          "uses": "xu-cheng/latex-action@v3",
+          "name": "Compile LaTeX report",
+          "with": {
+            "root_file": "./main.tex",
+            "working_directory": "./src"
+          }
+        },
+        {
+          "uses": "actions/upload-artifact@v4",
+          "name": "Upload report",
+          "with": {
+            "name": "Acouchi's Cookbook",
+            "path": "./src/main.pdf"
+          }
+        }
+      ]
+    }
+  }
+}
