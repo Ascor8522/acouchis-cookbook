@@ -1,27 +1,108 @@
 \documentclass[12pt,a4paper]{book}
 
+
+%%%%% Page layout %%%%%
+\usepackage{fancyhdr}
+
+%%%% Internationalization %%%%
 \usepackage[utf8]{inputenc}
 \usepackage[french]{babel}
 \usepackage[autolanguage]{numprint}
 \usepackage{hyphenat}
 \usepackage[T1]{fontenc}
 
-\usepackage{lipsum}
 
+%%%% ToC, index, references %%%%
+\usepackage{titlesec}
+\setcounter{secnumdepth}{0}
+\titleformat{\chapter}[display]{\Large\bfseries}{}{0pt}{\huge}
+\usepackage{imakeidx}
+\makeindex[columns=2,title=Index des ingrédients,columnseprule,options= -s style/index.ist]
+\indexsetup{level=\chapter}
+
+
+%%%% Other %%%%
+\usepackage{multicol}
+\usepackage{graphicx}
+
+
+%%%% Cooking %%%%
 \usepackage{cookingsymbols}
 \usepackage{cooking-units}
 
 % http://mirrors.ctan.org/macros/latex/contrib/cookingsymbols/cookingsymbols.pdf
 % http://mirrors.ctan.org/macros/latex/contrib/cooking-units/cooking-units.pdf
 
+
+%%%% Document configuration %%%%
 \title{Acouchi's Cookbook}
 \author{Acouchi}
-\date{\today}
+\date{Édition \the\year{}}
+
+
+\usepackage{hyperref}
+
+\usepackage[nomarginpar]{geometry}
+
+\usepackage{tabularx}
 
 \begin{document}
 
+% List items as bullets
+\renewcommand\labelitemi{\textbullet}
+
+% Round cooking units to 10 decimal places
+\cusetoptionfor{C,F,K,Re}{round-precision=10}
+
+% Headers + footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[RE]{\leftmark}
+\fancyhead[LO]{\rightmark}
+\fancyhead[LE,RO]{\thepage}
+
+
 \maketitle
 
-\lipsum[1-5]
+\vspace*{\fill}
+
+\hrulefill \hspace{12pt} Document généré le \today.
+
+\tableofcontents
+
+\chapter{Introduction}
+
+
+\newpage
+
+\chapter{Recettes}
+
+\cusetup{set-number-of-persons=40,recalculate-amount=true}
+
+\newpage
+
+\section{Entrées}
+
+\newpage
+
+\section{Plats}
+
+\newpage
+\input{./recipes/main-courses/salade-nicoise.tex}
+\newpage
+\input{./recipes/main-courses/chili-sin-carne.tex}
+\newpage
+
+\section{Desserts}
+
+\newpage
+
+\section{Boissons}
+
+\cusetup{set-number-of-persons=40,recalculate-amount=true}
+
+\newpage
+
+\printindex
 
 \end{document}
